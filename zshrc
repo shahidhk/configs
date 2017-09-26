@@ -5,7 +5,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="miloshadzic"
+#ZSH_THEME="agnoster"
+ZSH_THEME="steeef"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -53,7 +54,6 @@ plugins=(git)
 
 # User configuration
 
-  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -84,23 +84,21 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #. /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+bindkey -v
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
 
-# The next line updates PATH for the Google Cloud SDK.
-source '$HOME/bin/google-cloud-sdk/path.zsh.inc'
+setxkbmap -option caps:swapescape
 
-# The next line enables shell command completion for gcloud.
-source '$HOME/bin/google-cloud-sdk/completion.zsh.inc'
 
-export VAGRANT_DEFAULT_PROVIDER=virtualbox
-alias yaml2json="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=2, sort_keys=False)'"
-alias json2yaml="python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, indent=2, default_flow_style=False)'"
-alias io='TF_CMD=$(TF_ALIAS=fuck PYTHONIOENCODING=utf-8 TF_SHELL_ALIASES=$(alias) thefuck $(fc -ln -1 | tail -n 1)) && eval $TF_CMD && print -s $TF_CMD'
-export EDITOR=vim
-export TERM=xterm-256color
-
-alias install="sudo apt-get install"
+#alias yaml2json="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=2, sort_keys=False)'"
+#alias json2yaml="python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, indent=2, default_flow_style=False)'"
+alias update="sudo apt update && sudo apt dist-upgrade -y"
+alias install="sudo apt install"
 alias gac="git add .; git commit -m "
 alias json="python -m 'json.tool'"
 alias g="git"
@@ -109,14 +107,33 @@ alias tgzc='function _blah(){ tar -zcf $1.tar.gz $1; };_blah'
 alias pypretty="function _blah(){ python -c 'import sys, yaml, json; json.dump(sys.stdin, sys.stdout, indent=4)' < $1 > $1.pretty }"
 alias ikubectl="kubectl --insecure-skip-tls-verify=true"
 
-export GOPATH=$HOME/work/go
-export GOTOOLSPATH=$HOME/work/go-tools
-export PATH=$PATH:$GOTOOLSPATH/bin
-export PATH=$PATH:/usr/local/go/bin
-export PATH=/usr/local/bin:$HOME/bin:$PATH
-export ANDROID_HOME=$HOME/bin/android-sdk-linux
+# pbcopy hack
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
+alias k="kubectl"
+alias kh="kubectl -n hasura"
+
+alias ed="emacs --daemon"
+alias e="emacsclient.emacs24"
+
+
+kube_prompt()
+{
+   kubectl_current_context=$(kubectl config current-context)
+   kubectl_prompt="( \u2388 $kubectl_current_context )"
+   echo $kubectl_prompt
+}
+
+RPROMPT='%F{81}$(kube_prompt)'
+
+# The next line enables shell command completion for gcloud.
+if [ -f /home/shahidh/bin/google-cloud-sdk/completion.zsh.inc ]; then
+  source '/home/shahidh/bin/google-cloud-sdk/completion.zsh.inc'
+fi
+
+# Stack auto-complete
+eval "$(stack --bash-completion-script stack)"
 
 source <(kubectl completion zsh)
-
-# added by travis gem
-[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+source '/home/shahidh/bin/azure-cli/az.completion'
