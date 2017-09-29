@@ -144,7 +144,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Iosevka Term"
-                               :size 20
+                               :size 16
                                :weight medium
                                :width normal
                                :powerline-scale 1.2)
@@ -305,6 +305,7 @@ values."
    ))
 
 (defun dotspacemacs/user-init ()
+  (setq exec-path-from-shell-arguments '("-i"))
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init', before layer configuration
 executes.
