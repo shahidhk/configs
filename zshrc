@@ -107,6 +107,8 @@ alias tgzc='function _blah(){ tar -zcf $1.tar.gz $1; };_blah'
 alias pypretty="function _blah(){ python -c 'import sys, yaml, json; json.dump(sys.stdin, sys.stdout, indent=4)' < $1 > $1.pretty }"
 alias ikubectl="kubectl --insecure-skip-tls-verify=true"
 
+alias hctl="cd /home/shahidh/work/go/src/github.com/hasura/hasuractl"
+
 # pbcopy hack
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
@@ -116,6 +118,9 @@ alias kh="kubectl -n hasura"
 
 alias ed="emacs --daemon"
 alias e="emacsclient.emacs24"
+
+alias mouseoff="xinput set-prop 8 \"Device Enabled\" 0"
+alias mouseon="xinput set-prop 8 \"Device Enabled\" 1"
 
 
 kube_prompt()
@@ -133,7 +138,11 @@ if [ -f /home/shahidh/bin/google-cloud-sdk/completion.zsh.inc ]; then
 fi
 
 # Stack auto-complete
-eval "$(stack --bash-completion-script stack)"
+# eval "$(stack --bash-completion-script stack)"
 
 source <(kubectl completion zsh)
-source '/home/shahidh/bin/azure-cli/az.completion'
+# source '/home/shahidh/bin/azure-cli/az.completion'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
