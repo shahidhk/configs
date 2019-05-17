@@ -5,8 +5,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
-#ZSH_THEME="steeef"
+#ZSH_THEME="agnoster"
+ZSH_THEME="steeef"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -92,11 +92,13 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 
-setxkbmap -option caps:swapescape
+# setxkbmap -option caps:swapescape
+# setxkbmap -option 'caps:ctrl_modifier'  
+# xcape -e 'Caps_Lock=Escape'
 
 
-#alias yaml2json="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=2, sort_keys=False)'"
-#alias json2yaml="python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, indent=2, default_flow_style=False)'"
+alias yaml2json="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=2, sort_keys=False)'"
+alias json2yaml="python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, indent=2, default_flow_style=False)'"
 alias update="sudo apt update && sudo apt dist-upgrade -y"
 alias install="sudo apt install"
 alias gac="git add .; git commit -m "
@@ -107,7 +109,6 @@ alias tgzc='function _blah(){ tar -zcf $1.tar.gz $1; };_blah'
 alias pypretty="function _blah(){ python -c 'import sys, yaml, json; json.dump(sys.stdin, sys.stdout, indent=4)' < $1 > $1.pretty }"
 alias ikubectl="kubectl --insecure-skip-tls-verify=true"
 
-alias hctl="cd /home/shahidh/work/go/src/github.com/hasura/hasuractl"
 
 # pbcopy hack
 alias pbcopy='xclip -selection clipboard'
@@ -124,6 +125,23 @@ alias mouseoff="xinput set-prop 8 \"Device Enabled\" 0"
 alias mouseon="xinput set-prop 8 \"Device Enabled\" 1"
 
 alias gphm="git push hasura master"
+
+alias dc="docker-compose"
+
+dockerstop() {
+  docker stop $1
+  docker rm $1
+}
+
+dockerbp () {
+  docker build -t $1 .
+  docker push $1
+}
+
+urlencode() {
+  python -c 'import urllib, sys; print urllib.quote(sys.argv[1], sys.argv[2])' \
+    "$1" "$urlencode_safe"
+}
 
 kube_prompt()
 {
@@ -150,6 +168,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH=$PATH:/home/shahidh/bin
-
-source '/home/shahidh/lib/azure-cli/az.completion'
 

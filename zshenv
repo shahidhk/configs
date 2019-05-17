@@ -7,8 +7,8 @@ export EDITOR=vim
 export TERM=xterm-256color
 
 
-export GOPATH=$HOME/work/go
-export GOTOOLSPATH=$HOME/work/go-tools
+export GOPATH=$HOME/go
+export GOTOOLSPATH=$HOME/go-tools
 
 #export PATH=$PATH:$GOTOOLSPATH/bin
 #export PATH=$PATH:/snap/bin
@@ -24,4 +24,4 @@ export LANG=en_IN.UTF-8
 #fi
 #
 
-export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/go/bin:$GOPATH/bin:$GOTOOLSPATH/bin"
+export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/go/bin:$GOPATH/bin:$GOTOOLSPATH/bin:/home/linuxbrew/.linuxbrew/bin"
