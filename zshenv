@@ -7,8 +7,8 @@ export EDITOR=vim
 export TERM=xterm-256color
 
 
-export GOPATH=$HOME/work/go
-export GOTOOLSPATH=$HOME/work/go-tools
+export GOPATH=$HOME/workspace/go
+export GOTOOLSPATH=$HOME/workspace/go-tools
 
 #export PATH=$PATH:$GOTOOLSPATH/bin
 #export PATH=$PATH:/snap/bin
@@ -24,4 +24,13 @@ export LANG=en_IN.UTF-8
 #fi
 #
 
-export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/go/bin:$GOPATH/bin:$GOTOOLSPATH/bin"
+export PATH="$HOME/.yarn/bin:$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/go/bin:$GOPATH/bin:$GOTOOLSPATH/bin:/snap/bin:$HOME/workspace/flutter/bin"
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export ALTERNATE_EDITOR="vim"
+export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
+export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode

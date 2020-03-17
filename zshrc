@@ -95,8 +95,8 @@ bindkey '^r' history-incremental-search-backward
 setxkbmap -option caps:swapescape
 
 
-#alias yaml2json="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=2, sort_keys=False)'"
-#alias json2yaml="python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, indent=2, default_flow_style=False)'"
+alias yaml2json="python3 -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=2, sort_keys=False)'"
+alias json2yaml="python3 -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, indent=2, default_flow_style=False)'"
 alias update="sudo apt update && sudo apt dist-upgrade -y"
 alias install="sudo apt install"
 alias gac="git add .; git commit -m "
@@ -108,6 +108,7 @@ alias pypretty="function _blah(){ python -c 'import sys, yaml, json; json.dump(s
 alias ikubectl="kubectl --insecure-skip-tls-verify=true"
 
 alias hctl="cd /home/shahidh/work/go/src/github.com/hasura/hasuractl"
+alias gs="gst"
 
 # pbcopy hack
 alias pbcopy='xclip -selection clipboard'
@@ -117,13 +118,17 @@ alias k="kubectl"
 alias kh="kubectl -n hasura"
 alias kk="kubectl -n kube-system"
 
-alias ed="emacs --daemon"
-alias e="emacsclient -t"
+alias edmn="emacs --daemon"
+alias ec="emacsclient -create-frame --alternate-editor="""
+alias vim="emacsclient -create-frame --alternate-editor="""
 
 alias mouseoff="xinput set-prop 8 \"Device Enabled\" 0"
 alias mouseon="xinput set-prop 8 \"Device Enabled\" 1"
 
 alias gphm="git push hasura master"
+
+alias dc="docker-compose"
+
 
 kube_prompt()
 {
@@ -145,11 +150,6 @@ fi
 source <(kubectl completion zsh)
 # source '/home/shahidh/bin/azure-cli/az.completion'
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH=$PATH:/home/shahidh/bin
-
-source '/home/shahidh/lib/azure-cli/az.completion'
-
+# The next line updates PATH for Netlify's Git Credential Helper.
+if [ -f '/home/shahidh/.netlify/helper/path.zsh.inc' ]; then source '/home/shahidh/.netlify/helper/path.zsh.inc'; fi
