@@ -5,8 +5,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
-#ZSH_THEME="steeef"
+#ZSH_THEME="agnoster"
+ZSH_THEME="steeef"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -92,7 +92,9 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 
-setxkbmap -option caps:swapescape
+# setxkbmap -option caps:swapescape
+# setxkbmap -option 'caps:ctrl_modifier'  
+# xcape -e 'Caps_Lock=Escape'
 
 
 alias yaml2json="python3 -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=2, sort_keys=False)'"
@@ -129,6 +131,20 @@ alias gphm="git push hasura master"
 
 alias dc="docker-compose"
 
+dockerstop() {
+  docker stop $1
+  docker rm $1
+}
+
+dockerbp () {
+  docker build -t $1 .
+  docker push $1
+}
+
+urlencode() {
+  python -c 'import urllib, sys; print urllib.quote(sys.argv[1], sys.argv[2])' \
+    "$1" "$urlencode_safe"
+}
 
 kube_prompt()
 {
@@ -153,3 +169,9 @@ source <(kubectl completion zsh)
 
 # The next line updates PATH for Netlify's Git Credential Helper.
 if [ -f '/home/shahidh/.netlify/helper/path.zsh.inc' ]; then source '/home/shahidh/.netlify/helper/path.zsh.inc'; fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH=$PATH:/home/shahidh/bin
